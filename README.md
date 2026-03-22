@@ -4,7 +4,7 @@ Integrates **Chint DDSU-666** (single-phase) and **DTSU-666** (three-phase) smar
 connected via **Modbus RTU over TCP** (e.g. an Elwin Modbus/TCP converter).
 Code can be adjusted to support other manufacturers / devices.
 
-Integration has been created by claude.ai and tested locally using HomeAsssitant 2026.3, Elwin E11A and CHINT DDSU-666 and DTSU-666 smartmeters.
+Integration has been created by claude.ai and tested locally using HomeAssitant 2026.3, Elwin E11A and CHINT DDSU-666 and DTSU-666 smartmeters.
 
 ---
 
