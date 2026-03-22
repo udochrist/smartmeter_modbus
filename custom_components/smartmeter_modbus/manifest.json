@@ -1,0 +1,12 @@
+{
+  "domain": "smartmeter_modbus",
+  "name": "SmartMeter Modbus",
+  "version": "1.0.0",
+  "config_flow": true,
+  "documentation": "https://github.com/your-repo/smartmeter_modbus",
+  "requirements": ["pymodbus>=3.6.0"],
+  "dependencies": [],
+  "codeowners": [],
+  "iot_class": "local_polling",
+  "integration_type": "hub"
+}

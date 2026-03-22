@@ -1,0 +1,5 @@
+{
+  "name": "smartmeter_modbus",
+  "homeassistant": "2026.3",
+  "hacs": "2.0.3"
+}

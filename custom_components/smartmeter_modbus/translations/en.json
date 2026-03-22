@@ -1,0 +1,83 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configure Modbus/TCP Adapter",
+        "description": "Enter the connection details for your Elwin Modbus/TCP gateway.",
+        "data": {
+          "adapter_name": "Adapter Name",
+          "host": "Host / IP Address",
+          "port": "TCP Port",
+          "scan_interval": "Poll Interval (seconds)"
+        }
+      },
+      "meter_menu": {
+        "title": "Manage Smart Meters",
+        "description": "You have {meter_count} meter(s) configured. What would you like to do?",
+        "menu_options": {
+          "add_meter": "Add a smart meter",
+          "finish": "Finish setup"
+        }
+      },
+      "add_meter": {
+        "title": "Add Smart Meter",
+        "description": "Configure a Chint smart meter connected to this adapter.",
+        "data": {
+          "meter_name": "Meter Name",
+          "slave_id": "Modbus Slave ID (1\u2013247)",
+          "vendor": "Vendor",
+          "model": "Model"
+        }
+      },
+      "reconfigure": {
+        "title": "Reconfigure Adapter",
+        "description": "Update the connection details for this Modbus/TCP gateway (currently {current_host}:{current_port}). Existing meters will be preserved.",
+        "data": {
+          "adapter_name": "Adapter Name",
+          "host": "Host / IP Address",
+          "port": "TCP Port",
+          "scan_interval": "Poll Interval (seconds)"
+        }
+      }
+    },
+    "error": {
+      "duplicate_slave_id": "A meter with this Slave ID is already configured on this adapter.",
+      "cannot_connect": "Failed to connect to the Modbus gateway."
+    },
+    "abort": {
+      "already_configured": "An adapter at this host:port is already configured.",
+      "reconfigure_successful": "Adapter reconfigured successfully."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Manage Smart Meters",
+        "description": "You have {meter_count} meter(s) configured.",
+        "menu_options": {
+          "add_meter": "Add a smart meter",
+          "remove_meter": "Remove a smart meter",
+          "finish": "Save and close"
+        }
+      },
+      "add_meter": {
+        "title": "Add Smart Meter",
+        "data": {
+          "meter_name": "Meter Name",
+          "slave_id": "Modbus Slave ID (1\u2013247)",
+          "vendor": "Vendor",
+          "model": "Model"
+        }
+      },
+      "remove_meter": {
+        "title": "Remove Smart Meter",
+        "data": {
+          "slave_id": "Select meter to remove"
+        }
+      }
+    },
+    "error": {
+      "duplicate_slave_id": "A meter with this Slave ID is already configured on this adapter."
+    }
+  }
+}
