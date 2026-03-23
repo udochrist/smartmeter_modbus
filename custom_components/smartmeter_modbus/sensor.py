@@ -149,7 +149,7 @@ async def async_setup_entry(
             )
 
     # Remove stale entities that no longer correspond to any register
-    # (e.g. apparent_power_total left over from a previous version on DDSU-666)
+    # (e.g. from a removed meter or a previous version with different registers)
     ent_reg = er.async_get(hass)
     for entity_entry in er.async_entries_for_config_entry(ent_reg, entry.entry_id):
         if entity_entry.unique_id not in valid_unique_ids:
@@ -158,6 +158,23 @@ async def async_setup_entry(
                 entity_entry.entity_id, entity_entry.unique_id,
             )
             ent_reg.async_remove(entity_entry.entity_id)
+
+    # Remove orphaned meter devices that are no longer in config
+    # (the adapter device and any device whose identifier is still in active_device_ids is kept)
+    active_device_ids: set[tuple] = {(DOMAIN, adapter_device_identifier)}
+    for meter_cfg in entry.data.get(CONF_METERS, []):
+        slave_id: int = meter_cfg[CONF_SLAVE_ID]
+        model = MeterModel(meter_cfg[CONF_MODEL])
+        meter_key = f"{slave_id}_{model.value}"
+        active_device_ids.add((DOMAIN, f"{entry.entry_id}_{meter_key}"))
+
+    for device_entry in dr.async_entries_for_config_entry(dev_reg, entry.entry_id):
+        if not device_entry.identifiers.intersection(active_device_ids):
+            _LOGGER.debug(
+                "Removing orphaned device %s (%s)",
+                device_entry.name, device_entry.id,
+            )
+            dev_reg.async_remove_device(device_entry.id)
 
     # Adapter-level diagnostic entities (on the Elwin adapter device)
     adapter_device_info = DeviceInfo(identifiers={(DOMAIN, adapter_device_identifier)})

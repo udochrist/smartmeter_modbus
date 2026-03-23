@@ -238,7 +238,10 @@ class SmartMeterOptionsFlow(config_entries.OptionsFlow):
         if user_input is not None:
             slave_to_remove = int(user_input["slave_id"])
             self._meters = [m for m in self._meters if m[CONF_SLAVE_ID] != slave_to_remove]
-            return await self.async_step_init()
+            # Save and reload immediately — don't require a separate "finish" click
+            new_data = {**self._config_entry.data, CONF_METERS: self._meters}
+            self.hass.config_entries.async_update_entry(self._config_entry, data=new_data)
+            return self.async_create_entry(title="", data={})
 
         # Keys must be strings — HA form values are always returned as strings
         meter_options = {
